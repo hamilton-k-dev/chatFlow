@@ -1,0 +1,151 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                  String               @id @default(uuid())
+  email               String               @unique
+  name                String?
+  createdAt           DateTime             @default(now())
+  emailVerified       Boolean              @default(false)
+  image               String?
+  updatedAt           DateTime             @updatedAt
+  sessions            Session[]
+  accounts            Account[]
+  conversationMembers ConversationMember[]
+  groupMembers        GroupMember[]
+  messages            Message[]
+
+  @@map("user")
+}
+
+model Conversation {
+  id        String               @id @default(uuid())
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  members   ConversationMember[]
+  messages  Message[]
+
+  @@map("conversation")
+}
+
+model ConversationMember {
+  id             String       @id @default(uuid())
+  conversationId String
+  userId         String
+  isBlocked      Boolean      @default(false)
+  blockedBy      String?
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@index([conversationId])
+  @@index([userId])
+  @@map("conversation_member")
+}
+
+model Group {
+  id          String        @id @default(uuid())
+  name        String
+  description String?
+  avatar      String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  members     GroupMember[]
+  messages    Message[]
+
+  @@map("group")
+}
+
+model GroupMember {
+  id      String  @id @default(uuid())
+  groupId String
+  userId  String
+  isAdmin Boolean @default(false)
+  group   Group   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+  @@index([groupId])
+  @@index([userId])
+  @@map("group_member")
+}
+
+model Message {
+  id             String        @id @default(uuid())
+  conversationId String?
+  groupId        String?
+  senderId       String
+  type           String        @default("text")
+  text           String?
+  imageUrl       String?
+  audioUrl       String?
+  duration       String?
+  status         String        @default("sent")
+  isDeleted      Boolean       @default(false)
+  replyToId      String?
+  createdAt      DateTime      @default(now())
+  conversation   Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  group          Group?        @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  sender         User          @relation(fields: [senderId], references: [id])
+  replyTo        Message?      @relation("MessageReplies", fields: [replyToId], references: [id], onDelete: SetNull)
+  replies        Message[]     @relation("MessageReplies")
+
+  @@index([conversationId])
+  @@index([groupId])
+  @@index([senderId])
+  @@map("message")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(uuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @default(uuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
