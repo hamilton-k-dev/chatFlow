@@ -310,7 +310,7 @@ export default function ChatApp({ authUser }: Props) {
         </div>
       )}
       <div className={`flex h-screen overflow-hidden ${darkMode ? 'bg-slate-950' : 'bg-slate-100'}`}>
-        <div className={`flex-shrink-0 w-full md:w-80 ${mobileView === 'list' ? 'flex' : 'hidden'} md:flex flex-col h-full`}>
+        <div className={`flex-shrink-0 w-full md:w-80 ${mobileView !== 'chat' ? 'flex' : 'hidden'} md:flex flex-col h-full`}>
           {mobileView === 'settings' ? (
             <SettingsPanel {...settingsProps} />
           ) : (
@@ -318,12 +318,8 @@ export default function ChatApp({ authUser }: Props) {
           )}
         </div>
 
-        <div className={`flex-1 flex ${mobileView !== 'list' ? 'flex' : 'hidden'} md:flex h-full overflow-hidden`}>
-          {mobileView === 'settings' ? (
-            <div className="flex-1">
-              <SettingsPanel {...settingsProps} />
-            </div>
-          ) : activeGroup ? (
+        <div className={`flex-1 flex ${mobileView === 'chat' ? 'flex' : 'hidden'} md:flex h-full overflow-hidden`}>
+          {activeGroup ? (
             <div className="flex-1">
               <GroupChatWindow
                 group={activeGroup}
