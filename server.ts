@@ -27,6 +27,13 @@ app.prepare().then(() => {
 
   setupSocketHandlers(io);
 
+  // Suppress noisy ErrorEvent logs from the ws transport on abrupt client disconnects
+  io.engine.on("connection_error", (err: Error) => {
+    if (process.env.NODE_ENV === "development") {
+      console.warn("[socket] connection error:", err.message);
+    }
+  });
+
   httpServer.listen(port, "0.0.0.0", () => {
     console.log(`> Ready on http://localhost:${port}`);
   });

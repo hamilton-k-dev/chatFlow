@@ -6,10 +6,10 @@ type Session = {
   session: { id: string; expiresAt: string };
 };
 
-const PUBLIC_ROUTES = ["/login", "/register"];
+const PUBLIC_ROUTES = ["/", "/login", "/register"];
 const AUTH_ROUTES = ["/login", "/register"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const { data: session } = await betterFetch<Session>(
@@ -34,9 +34,8 @@ export async function middleware(request: NextRequest) {
   }
 
   if (pathname === "/") {
-    return NextResponse.redirect(
-      new URL(isAuthenticated ? "/chat" : "/login", request.url)
-    );
+    if (isAuthenticated) return NextResponse.redirect(new URL("/chat", request.url));
+    return NextResponse.next();
   }
 
   if (!isAuthenticated && !isPublicRoute) {
