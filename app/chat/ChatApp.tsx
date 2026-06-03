@@ -381,9 +381,6 @@ export default function ChatApp({ authUser }: Props) {
             </div>
           )}
 
-          <div className={`hidden lg:flex flex-col w-72 border-l ${darkMode ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}>
-            <SettingsPanel {...settingsProps} onClose={() => {}} />
-          </div>
         </div>
 
         <NewChatModal

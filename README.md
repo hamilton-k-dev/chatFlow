@@ -1,8 +1,24 @@
 # ChatFlow
 
-A real-time full-stack chat application built with Next.js 15, Socket.IO, Prisma, and Neon PostgreSQL. Supports private messaging, group chats, voice messages, image sharing, message replies, and more.
+A real-time full-stack chat application built with Next.js 16, Socket.IO, Prisma, and Neon PostgreSQL. Supports private messaging, group chats, voice messages, image sharing, message replies, and more.
 
-![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js) ![Socket.IO](https://img.shields.io/badge/Socket.IO-4-white?logo=socket.io&logoColor=black) ![Prisma](https://img.shields.io/badge/Prisma-7-2D3748?logo=prisma) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js) ![Socket.IO](https://img.shields.io/badge/Socket.IO-4-white?logo=socket.io&logoColor=black) ![Prisma](https://img.shields.io/badge/Prisma-7-2D3748?logo=prisma) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
+
+---
+
+## Screenshots
+
+| Landing page | Login |
+|---|---|
+| ![Landing](public/screenshots/landing.png) | ![Login](public/screenshots/login.png) |
+
+| Chat home | Chat window |
+|---|---|
+| ![Chat home](public/screenshots/chat-home.png) | ![Chat window](public/screenshots/chat-window.png) |
+
+| Settings panel | Dark mode |
+|---|---|
+| ![Settings](public/screenshots/settings.png) | ![Dark mode](public/screenshots/chat-dark.png) |
 
 ---
 
@@ -33,7 +49,7 @@ A real-time full-stack chat application built with Next.js 15, Socket.IO, Prisma
 
 | Layer | Technology |
 |---|---|
-| Framework | Next.js 15 (App Router) |
+| Framework | Next.js 16 (App Router) |
 | Language | TypeScript 5 |
 | Real-time | Socket.IO 4 (custom Node server via `tsx`) |
 | Database | Neon (serverless PostgreSQL) |
