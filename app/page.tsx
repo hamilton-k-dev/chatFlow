@@ -13,12 +13,12 @@ const features = [
 ];
 
 const demoAccounts = [
-  { name: 'Sarah Mitchell',   email: 'sarah@example.com' },
-  { name: 'James Carter',     email: 'james@example.com' },
-  { name: 'Emily Rodriguez',  email: 'emily@example.com' },
-  { name: 'Michael Chen',     email: 'michael@example.com' },
-  { name: 'Olivia Thompson',  email: 'olivia@example.com' },
-  { name: 'Daniel Park',      email: 'daniel@example.com' },
+  { name: 'Alex Morgan',    email: 'alex@example.com' },
+  { name: 'Emma Wilson',    email: 'emma@example.com' },
+  { name: 'Liam Johnson',   email: 'liam@example.com' },
+  { name: 'Sofia Martinez', email: 'sofia@example.com' },
+  { name: 'Noah Davis',     email: 'noah@example.com' },
+  { name: 'Ava Brown',      email: 'ava@example.com' },
 ];
 
 const stack = [

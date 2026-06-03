@@ -16,9 +16,13 @@ A real-time full-stack chat application built with Next.js 16, Socket.IO, Prisma
 |---|---|
 | ![Chat home](public/screenshots/chat-home.png) | ![Chat window](public/screenshots/chat-window.png) |
 
-| Settings panel | Dark mode |
+| Group chat | Dark mode |
 |---|---|
-| ![Settings](public/screenshots/settings.png) | ![Dark mode](public/screenshots/chat-dark.png) |
+| ![Group chat](public/screenshots/group-chat.png) | ![Dark mode](public/screenshots/chat-dark.png) |
+
+| Settings panel | Mobile |
+|---|---|
+| ![Settings](public/screenshots/settings.png) | ![Mobile](public/screenshots/mobile.png) |
 
 ---
 
